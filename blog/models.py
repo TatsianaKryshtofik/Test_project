@@ -71,6 +71,7 @@ class Post(models.Model):
 class Category(models.Model):
 
     title = models.CharField('title', max_length=50)
+    description = models.TextField('text', blank=True)
     subtitle = models.ManyToManyField('subcategory')
     created_at = models.DateTimeField('created_at', auto_now_add=True)
 
