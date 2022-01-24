@@ -39,8 +39,8 @@ class UserInfo(models.Model):
     city = models.CharField('city', max_length=50)
     address = models.CharField('address', max_length=50)
     phone = models.CharField('phone', max_length=12)
-    created = models.DateTimeField('created', auto_now_add=True)
-    updated = models.DateTimeField('updated', auto_now=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
+    updated_at = models.DateTimeField('updated_at', auto_now=True)
 
     class Meta:
         verbose_name = 'user info'
@@ -55,14 +55,14 @@ class Post(models.Model):
     title = models.CharField('title', max_length=50)
     body = models.TextField('text', blank=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='post')
-    created = models.DateTimeField('created', auto_now_add=True)
-    updated = models.DateTimeField('updated', auto_now=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
+    updated_at = models.DateTimeField('updated_at', auto_now=True)
     image = models.ForeignKey('Image', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'post'
         verbose_name_plural = 'posts'
-        ordering = ['created', 'title']
+        ordering = ['created_at', 'title']
 
     def __str__(self):
         return self.title
@@ -72,7 +72,7 @@ class Category(models.Model):
 
     title = models.CharField('title', max_length=50)
     subtitle = models.ManyToManyField('subcategory')
-    created = models.DateTimeField('created', auto_now_add=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
 
     class Meta:
         verbose_name = 'category'
@@ -84,7 +84,7 @@ class Category(models.Model):
 
 class Subcategory(models.Model):
     title = models.CharField('title', max_length=50)
-    created = models.DateTimeField('updated', auto_now_add=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
 
     class Meta:
         verbose_name = 'subcategory'
@@ -97,7 +97,7 @@ class Subcategory(models.Model):
 class Tag(models.Model):
 
     title = models.CharField('title', max_length=50)
-    created = models.DateTimeField('updated', auto_now_add=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
 
     class Meta:
         verbose_name = 'tag'
@@ -111,8 +111,8 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     body = models.TextField('text')
-    created = models.DateTimeField('created', auto_now_add=True)
-    updated = models.DateTimeField('updated', auto_now=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
+    updated_at = models.DateTimeField('updated_at', auto_now=True)
 
     class Meta:
         verbose_name = 'comment'
@@ -122,8 +122,8 @@ class Comment(models.Model):
 class PostRating(models.Model):
 
     value = models.SmallIntegerField('value')
-    created = models.DateTimeField('created', auto_now_add=True)
-    update = models.DateTimeField('updated', auto_now=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
+    updated_at = models.DateTimeField('updated_at', auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
@@ -140,7 +140,7 @@ class Image(models.Model):
     image_url = models.URLField('image_url', max_length=50)
     length = models.CharField('length', max_length=50)
     width = models.CharField('width', max_length=50)
-    created = models.DateTimeField('created', auto_now_add=True)
+    created_at = models.DateTimeField('created_at', auto_now_add=True)
 
     class Meta:
         verbose_name = 'image'
