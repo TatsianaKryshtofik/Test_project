@@ -29,9 +29,6 @@ class User(AbstractBaseUser):
         full_name = '{} {}'.format(self.first_name, self.last_name)
         return full_name.strip()
 
-    def get_short_name(self):
-        return self.first_name
-
 
 class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
