@@ -53,7 +53,7 @@ class Post(models.Model):
     category = models.ForeignKey('category', on_delete=models.SET_NULL, null=True)
     subcategory = models.ForeignKey('subcategory', on_delete=models.SET_NULL, null=True)
     title = models.CharField('title', max_length=50)
-    body = models.TextField('text', blank=True)
+    description = models.TextField('text', blank=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='post')
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
@@ -110,7 +110,7 @@ class Tag(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    body = models.TextField('text')
+    description = models.TextField('text')
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
 
