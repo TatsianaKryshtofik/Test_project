@@ -31,11 +31,10 @@ class User(AbstractBaseUser):
 
 
 class UserInfo(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
     country = models.CharField('country', max_length=50)
     city = models.CharField('city', max_length=50)
     address = models.CharField('address', max_length=50)
-    phone = models.CharField('phone', max_length=12)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
 
