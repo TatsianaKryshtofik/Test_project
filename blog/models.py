@@ -135,7 +135,7 @@ class PostRating(models.Model):
 
 class Image(models.Model):
 
-    image_url = models.URLField('image_url', max_length=50)
+    image_url = models.URLField('image_url', max_length=150)
     length = models.CharField('length', max_length=50)
     width = models.CharField('width', max_length=50)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
