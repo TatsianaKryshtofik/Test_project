@@ -9,13 +9,13 @@ class User(AbstractBaseUser):
 
     email = models.EmailField('email', unique=True)
     username = models.CharField('username', max_length=50)
-    first_name = models.CharField('name', max_length=50, blank=True)
-    last_name = models.CharField('surname', max_length=50, blank=True)
+    first_name = models.CharField('name', max_length=50)
+    last_name = models.CharField('surname', max_length=50)
     birthday = models.DateField('birthday', null=True)
-    phone_number = models.CharField('phone_number', max_length=12)
+    phone_number = models.CharField('phone_number', max_length=12, null=True, blank=True)
     date_joined = models.DateTimeField('registered', auto_now_add=True)
     is_active = models.BooleanField('is_active', default=True)
-    avatar = models.ForeignKey('Image', on_delete=models.CASCADE)
+    avatar = models.ForeignKey('Image', on_delete=models.CASCADE, null=True, blank=True)
 
     objects = UserManager()
 
@@ -35,7 +35,7 @@ class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, primary_key=True)
     country = models.CharField('country', max_length=50)
     city = models.CharField('city', max_length=50)
-    address = models.CharField('address', max_length=50)
+    address = models.CharField('address', max_length=50, null=True, blank=True)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
 
@@ -47,14 +47,14 @@ class UserInfo(models.Model):
 class Post(models.Model):
 
     user = models.ForeignKey(User, verbose_name='author', on_delete=models.CASCADE)
-    category = models.ForeignKey('category', on_delete=models.SET_NULL, null=True)
-    subcategory = models.ForeignKey('subcategory', on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey('category', on_delete=models.SET_NULL)
+    subcategory = models.ForeignKey('subcategory', on_delete=models.SET_NULL)
     title = models.CharField('title', max_length=50)
     description = models.TextField('text', blank=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='post')
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
-    image = models.ForeignKey('Image', on_delete=models.CASCADE)
+    image = models.ForeignKey('Image', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name = 'post'
@@ -108,7 +108,7 @@ class Tag(models.Model):
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    description = models.TextField('text')
+    description = models.TextField('text', blank=True)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
 
