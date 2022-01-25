@@ -20,7 +20,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'password', 'username']
+    REQUIRED_FIELDS = ['email', 'username']
 
     class Meta:
         verbose_name = 'user'
@@ -143,4 +143,3 @@ class Image(models.Model):
     class Meta:
         verbose_name = 'image'
         verbose_name_plural = 'images'
-
