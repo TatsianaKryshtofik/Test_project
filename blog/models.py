@@ -47,8 +47,8 @@ class UserInfo(models.Model):
 class Post(models.Model):
 
     user = models.ForeignKey(User, verbose_name='author', on_delete=models.CASCADE)
-    category = models.ForeignKey('category', on_delete=models.SET_NULL)
-    subcategory = models.ForeignKey('subcategory', on_delete=models.SET_NULL)
+    category = models.ForeignKey('category', on_delete=models.CASCADE)
+    subcategory = models.ForeignKey('subcategory', on_delete=models.CharField)
     title = models.CharField('title', max_length=50)
     description = models.TextField('text', blank=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='post')
@@ -111,6 +111,7 @@ class Comment(models.Model):
     description = models.TextField('text', blank=True)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
+    deleted_at = models.DateTimeField('deleted_at', auto_now=True)
 
     class Meta:
         verbose_name = 'comment'
