@@ -111,7 +111,7 @@ class Comment(models.Model):
     description = models.TextField('text', blank=True)
     created_at = models.DateTimeField('created_at', auto_now_add=True)
     updated_at = models.DateTimeField('updated_at', auto_now=True)
-    deleted_at = models.DateTimeField('deleted_at', auto_now=True)
+    deleted_at = models.DateTimeField('deleted_at', null=True)
 
     class Meta:
         verbose_name = 'comment'
